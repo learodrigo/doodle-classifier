@@ -1,6 +1,9 @@
 # doodle-classifier
 
-In order to make this project run, you have to serve a local server
+In order to make this project run, you have to serve a local server.
+eg:
+`run "python3 -m http.server`
+
 https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server
 
 ## References
@@ -12,3 +15,4 @@ https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_t
 - http://projects.rajivshah.com/blog/2017/07/14/QuickDraw/
 - http://yann.lecun.com/exdb/mnist/
 - https://github.com/MimiOnuoha/missing-datasets
+- https://en.wikipedia.org/wiki/One-hot
