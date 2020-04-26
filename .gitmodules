@@ -1,0 +1,3 @@
+[submodule "js-neural-network"]
+	path = js-neural-network
+	url = https://github.com/learodrigo/js-neural-network
