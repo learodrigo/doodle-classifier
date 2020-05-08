@@ -19,10 +19,10 @@ function categoryPreparation (category, data, label) {
 // Runs categoryPreparation for each dataset
 function dataPreparation () {
   categoryPreparation(cats, cats_data, CAT)
-  // categoryPreparation(dogs, dogs_data, DOG)
-  // categoryPreparation(horses, horses_data, HORSE)
-  // categoryPreparation(houses, houses_data, HOUSE)
-  // categoryPreparation(plants, plants_data, PLANT)
   categoryPreparation(rainbows, rainbows_data, RAINBOW)
   categoryPreparation(trains, trains_data, TRAIN)
+  categoryPreparation(dogs, dogs_data, DOG)
+  categoryPreparation(horses, horses_data, HORSE)
+  categoryPreparation(houses, houses_data, HOUSE)
+  categoryPreparation(plants, plants_data, PLANT)
 }

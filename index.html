@@ -4,12 +4,12 @@
     <title>doodleClassifier</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
-    <script src="visualize.js"></script>
-    <script src="dataPrep.js"></script>
-    <script src="activate.js"></script>
-    <script src="sketch.js"></script>
-    <script src="js-neural-network/NN.js" charset="utf-8"></script>
-    <script src="js-neural-network/Matrix.js" charset="utf-8"></script>
+    <script src="./visualize.js"></script>
+    <script src="./dataPrep.js"></script>
+    <script src="./activate.js"></script>
+    <script src="./sketch.js"></script>
+    <script src="./js-neural-network/NN.js" charset="utf-8"></script>
+    <script src="/js-neural-network/Matrix.js" charset="utf-8"></script>
 
     <meta charset="utf-8" />
     <style media="screen">
@@ -20,12 +20,27 @@
         margin: 0;
         padding: 0;
       }
+      body {
+        margin: 0 auto;
+        text-align: center;
+        width: 320px;
+      }
+      h1, p {
+        color: white;
+      }
       button {
-        font-size: 24px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        padding: 4px 8px;
         margin: 8px;
+      }
+      #train {
+        margin-left: 0;
       }
       canvas {
         display: block;
+        margin: 0 auto;
       }
       a:hover {
         text-decoration: line-through;
@@ -33,8 +48,16 @@
     </style>
   </head>
   <body>
+    <h1>Doodler classifier</h1>
+    <p>This sketch classify what you draw on the canvas and guess the drawing using a neural network library</p>
+    <p><b>Train</b> and <b>test</b> buttons are used for neural network pupose</p>
+    <p><b>Guess</b> button is used for test your draw</p>
+    <p><b>Clear</b> button is for resetting the canvas</p>
+    <p>Data available for drawing: cats, rainbows, trains, dogs, horses, houses, plants</p>
+    <p>Open the console for more details on what's going on</p>
     <button id="train">Train</button>
     <button id="test">Test</button>
     <button id="guess">Guess</button>
+    <button id="clearButton">Clear</button>
   </body>
 </html>

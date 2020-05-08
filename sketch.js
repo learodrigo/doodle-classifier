@@ -1,38 +1,48 @@
+// TODO: Handle outputs dynamically
+// sketch.js:9 sketch.js:12 sketch.js:45 activate.js:27
+const OUTPUTS_CATEGORIES = [
+  {
+
+  }
+];
+
 // constansts
 const CANVAS = 280
 const IMG_SIZE = 28
 const IMG_SIZE_SQ = 784
 const TOTAL_DATA = 1000
+
 // Outputs from NN will be map with these values
 const CAT = 0
-const DOG = 1
-const HORSE = 2
-const HOUSE = 3
-const PLANT = 4
-const RAINBOW = 5
-const TRAIN = 6
+const RAINBOW = 1
+const TRAIN = 2
+const DOG = 3
+const HORSE = 4
+const HOUSE = 5
+const PLANT = 6
 
 // Raw data
-let cats_data, dogs_data, horses_data, houses_data, plants_data, rainbows_data, trains_data;
+let cats_data, rainbows_data, trains_data, dogs_data, horses_data, houses_data, plants_data;
 // Training data
-let cats = {}, dogs = {}, horses = {}, houses = {}, plants = {}, rainbows = {}, trains = {};
+let cats = {}, rainbows = {}, trains = {}, dogs = {}, horses = {}, houses = {}, plants = {};
 // Neural network
 let nn
 
+let pp
+
 function preload () {
   cats_data     = loadBytes('data/cats1000.bin')
-  // dogs_data     = loadBytes('data/dogs1000.bin')
-  // horses_data   = loadBytes('data/horses1000.bin')
-  // houses_data   = loadBytes('data/houses1000.bin')
-  // plants_data   = loadBytes('data/plants1000.bin')
   rainbows_data = loadBytes('data/rainbows1000.bin')
   trains_data   = loadBytes('data/trains1000.bin')
+  dogs_data     = loadBytes('data/dogs1000.bin')
+  horses_data   = loadBytes('data/horses1000.bin')
+  houses_data   = loadBytes('data/houses1000.bin')
+  plants_data   = loadBytes('data/plants1000.bin')
 }
 
 function setup () {
   createCanvas(CANVAS, CANVAS)
   background(255)
-  console.clear()
   dataPreparation()
 
   // 1. Total number of pixels per dataset
@@ -45,19 +55,21 @@ function setup () {
   train.addEventListener('click', () => {
     print('Training...')
     trainingNN(nn)
-    console.clear()
     counter++
     print('Round:', counter)
   })
+
   // Testing button handler
   test.addEventListener('click', () => {
     print('Testing...')
     let percentage = testingNN(nn)
-    console.clear()
     print('Correct: %', nf(percentage, 2, 2))
   })
+
   // Guessing button handler
   guess.addEventListener('click', () => {
+    print('Guessing...')
+
     // To hold the pixels to test
     let inputs = []
     // get() returns a copy of the canvas
@@ -66,19 +78,26 @@ function setup () {
     img.loadPixels()
     // Looping for each pixel
     // As p5js handles each pixel with rgba values, we have to skip those 3 extra spots
-    for (let i = 0; i < IMG_SIZE_SQ; i += 4) {
+    for (let i = 0; i < IMG_SIZE_SQ; i++) {
       // As colors aren't being handle here, we only need the alpha value
       let bright = img.pixels[i * 4]
       // Normalizing values from 0 to 1 to match dataset (we did 255 - x there too)
       inputs[i] = (255 - bright) / 255
     }
     img.updatePixels()
+
     let guess = nn.predict(inputs)
     let m = max(guess)
     let classification = guess.indexOf(m)
     switch (classification) {
       case CAT:
-        print('CAT')
+        print('CAT');
+        break;
+      case RAINBOW:
+        print('RAINBOW');
+        break;
+      case TRAIN:
+        print('TRAIN');
         break;
       case DOG:
         print('DOG')
@@ -92,14 +111,15 @@ function setup () {
       case PLANT:
         print('PLANT')
         break;
-      case RAINBOW:
-        print('RAINBOW')
-        break;
-      case TRAIN:
-        print('TRAIN')
-        break;
       default:
+        console.error('Something went wrong');
+        break;
     }
+  })
+
+  clearButton.addEventListener('click', () => {
+    background(255);
+    console.clear()
   })
 
   // Desbuggin data 28x28px
