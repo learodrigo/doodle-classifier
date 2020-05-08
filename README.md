@@ -2,7 +2,7 @@
 
 In order to make this project run, you have to serve a local server.
 eg:
-`run "python3 -m http.server`
+`python3 -m http.server`
 
 https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server
 
